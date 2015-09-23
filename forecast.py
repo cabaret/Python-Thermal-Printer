@@ -61,7 +61,7 @@ def forecast(idx):
 	printer.print(' max ' + hi)
 	printer.print(deg)
     printer.feed(1)
-	printer.println(' ' + conditions[cond])
+	printer.println(' ' + cond)
 
 printer = Adafruit_Thermal("/dev/ttyAMA0", 19200, timeout=5)
 deg     = chr(0xf8) # Degree symbol on thermal printer
