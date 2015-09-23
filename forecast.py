@@ -54,10 +54,13 @@ def forecast(idx):
 	lo      = dom.getElementsByTagName(tag)[idx].getAttribute('low')
 	hi      = dom.getElementsByTagName(tag)[idx].getAttribute('high')
 	cond    = dom.getElementsByTagName(tag)[idx].getAttribute('text')
-	printer.print(day + ': min ' + lo )
+	printer.print(day + ':')
+    printer.feed(1)
+    printer.print('min ' + lo )
 	printer.print(deg)
 	printer.print(' max ' + hi)
 	printer.print(deg)
+    printer.feed(1)
 	printer.println(' ' + conditions[cond])
 
 printer = Adafruit_Thermal("/dev/ttyAMA0", 19200, timeout=5)
@@ -72,6 +75,7 @@ dom = parseString(urllib.urlopen(
 printer.inverseOn()
 printer.print('{:^32}'.format(
   dom.getElementsByTagName('description')[0].firstChild.data))
+printer.feed(1)
 printer.inverseOff()
 
 # Print current conditions
