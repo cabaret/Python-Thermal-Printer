@@ -90,7 +90,7 @@ printer.print('{:^32}'.format(currentConds))
 printer.boldOff()
 printer.feed(1)
 
-# Print forecast 
+# Print forecast
 printer.boldOn()
 printer.print('{:^32}'.format('Voorspelling:'))
 printer.boldOff()
