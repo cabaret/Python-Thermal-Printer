@@ -72,19 +72,19 @@ GPIO.output(ledPin, GPIO.HIGH)
 time.sleep(30)
 
 # Show IP address (if network is available)
-try:
-	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-	s.connect(('8.8.8.8', 0))
-	printer.print('My IP address is ' + s.getsockname()[0])
-	printer.feed(3)
-except:
-	printer.boldOn()
-	printer.println('Network is unreachable.')
-	printer.boldOff()
-	printer.print('Connect display and keyboard\n'
-	  'for network troubleshooting.')
-	printer.feed(3)
-	exit(0)
+# try:
+# 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+# 	s.connect(('8.8.8.8', 0))
+# 	printer.print('My IP address is ' + s.getsockname()[0])
+# 	printer.feed(3)
+# except:
+# 	printer.boldOn()
+# 	printer.println('Network is unreachable.')
+# 	printer.boldOff()
+# 	printer.print('Connect display and keyboard\n'
+# 	  'for network troubleshooting.')
+# 	printer.feed(3)
+# 	exit(0)
 
 # Print greeting image
 printer.printImage(Image.open('gfx/hello.png'), True)
