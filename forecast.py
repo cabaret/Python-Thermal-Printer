@@ -84,7 +84,7 @@ printer.print('{:^32}'.format(
   dom.getElementsByTagName('pubDate')[0].firstChild.data))
 temp = dom.getElementsByTagName('yweather:condition')[0].getAttribute('temp')
 cond = dom.getElementsByTagName('yweather:condition')[0].getAttribute('code')
-currentConds = temp + deg + ' ' + conditions[int(cond)]
+currentConds = temp + '°' + ' ' + conditions[int(cond)]
 printer.boldOn()
 printer.print('{:^32}'.format(currentConds))
 printer.boldOff()
