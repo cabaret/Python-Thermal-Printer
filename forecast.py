@@ -76,7 +76,7 @@ printer.feed(1)
 printer.inverseOff()
 
 # Print current conditions
-printer.feed(2)
+printer.feed(1)
 printer.boldOn()
 printer.print('{:^32}'.format('Weersomstandigheden:'))
 printer.boldOff()
@@ -86,13 +86,14 @@ temp = dom.getElementsByTagName('yweather:condition')[0].getAttribute('temp')
 cond = dom.getElementsByTagName('yweather:condition')[0].getAttribute('text')
 printer.print(temp)
 printer.print(deg)
-printer.println(' ' + cond)
+printer.println(' ' + conditions[int(cond)])
 printer.boldOn()
 
 # Print forecast
-printer.print('{:^32}'.format('Forecast:'))
+printer.print('{:^32}'.format('Voorspelling:'))
 printer.boldOff()
 forecast(0)
+printer.feed(1)
 forecast(1)
 
 printer.feed(3)
