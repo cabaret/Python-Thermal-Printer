@@ -5,10 +5,10 @@
 # forecasts for next two days.  See timetemp.py for a different
 # weather example using nice bitmaps.
 # Written by Adafruit Industries.  MIT license.
-# 
+#
 # Required software includes Adafruit_Thermal and PySerial libraries.
 # Other libraries used are part of stock Python install.
-# 
+#
 # Resources:
 # http://www.adafruit.com/products/597 Mini Thermal Receipt Printer
 # http://www.adafruit.com/products/600 Printer starter pack
@@ -24,6 +24,11 @@ from xml.dom.minidom import parseString
 # and requesting a forecast, then copy the number from the end of the
 # current URL string and paste it here.
 WOEID = '2459115'
+
+# Select the units for degrees (Fahrenheit, f or Celsius, c).
+# Changing the temperature unit also changes the other units. Imperial
+# for Fahrenheit and Metric for Celsius.
+tempUnit = 'c'
 
 # Dumps one forecast line to the printer
 def forecast(idx):
@@ -43,7 +48,8 @@ deg     = chr(0xf8) # Degree symbol on thermal printer
 
 # Fetch forecast data from Yahoo!, parse resulting XML
 dom = parseString(urllib.urlopen(
-        'http://weather.yahooapis.com/forecastrss?w=' + WOEID).read())
+        'http://weather.yahooapis.com/forecastrss?u=' + tempUnit +
+        '&w=' + WOEID).read())
 
 # Print heading
 printer.inverseOn()
