@@ -23,23 +23,40 @@ from xml.dom.minidom import parseString
 # by 'manually' visiting http://weather.yahoo.com, entering a location
 # and requesting a forecast, then copy the number from the end of the
 # current URL string and paste it here.
-WOEID = '2459115'
+WOEID = '976815'
 
 # Select the units for degrees (Fahrenheit, f or Celsius, c).
 # Changing the temperature unit also changes the other units. Imperial
 # for Fahrenheit and Metric for Celsius.
 tempUnit = 'c'
 
+days = {
+    'Mon': 'Ma',
+    'Tue': 'Di',
+    'Wed': 'Woe',
+    'Thu': 'Do',
+    'Fri': 'Vr',
+    'Sat': 'Zat',
+    'Sun': 'Zo'
+}
+
+conditions = {
+    'Tornado': 'Tornado',
+    'Tropical storm': 'Tropische storm',
+    'Hurricane': 'Orkaan',
+    'Partly cloudy': 'Gedeeltelijk bewolkt'
+}
+
 # Dumps one forecast line to the printer
 def forecast(idx):
 	tag     = 'yweather:forecast'
-	day     = dom.getElementsByTagName(tag)[idx].getAttribute('day')
+	day     = days[dom.getElementsByTagName(tag)[idx].getAttribute('day')]
 	lo      = dom.getElementsByTagName(tag)[idx].getAttribute('low')
 	hi      = dom.getElementsByTagName(tag)[idx].getAttribute('high')
 	cond    = dom.getElementsByTagName(tag)[idx].getAttribute('text')
-	printer.print(day + ': low ' + lo )
+	printer.print(day + ': min ' + lo )
 	printer.print(deg)
-	printer.print(' high ' + hi)
+	printer.print(' max ' + hi)
 	printer.print(deg)
 	printer.println(' ' + cond)
 
@@ -58,8 +75,9 @@ printer.print('{:^32}'.format(
 printer.inverseOff()
 
 # Print current conditions
+printer.feed(1)
 printer.boldOn()
-printer.print('{:^32}'.format('Current conditions:'))
+printer.print('{:^32}'.format('Weersomstandigheden:'))
 printer.boldOff()
 printer.print('{:^32}'.format(
   dom.getElementsByTagName('pubDate')[0].firstChild.data))
