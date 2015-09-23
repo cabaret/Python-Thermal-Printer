@@ -46,16 +46,6 @@ def hold():
   GPIO.output(ledPin, GPIO.LOW)
 
 
-# Called at periodic intervals (30 seconds by default).
-# Invokes twitter script.
-def interval():
-  GPIO.output(ledPin, GPIO.HIGH)
-  p = subprocess.Popen(["python", "twitter.py", str(lastId)],
-    stdout=subprocess.PIPE)
-  GPIO.output(ledPin, GPIO.LOW)
-  return p.communicate()[0] # Script pipes back lastId, returned to main
-
-
 # Called once per day (6:30am by default).
 # Invokes weather forecast and sudoku-gfx scripts.
 def daily():
@@ -148,19 +138,9 @@ while(True):
   # Once per day (currently set for 6:30am local time, or when script
   # is first run, if after 6:30am), run forecast and sudoku scripts.
   l = time.localtime()
-  if (60 * l.tm_hour + l.tm_min) > (60 * 6 + 30):
+  if (60 * l.tm_hour + l.tm_min) > (60 * 8 + 30):
     if dailyFlag == False:
       daily()
       dailyFlag = True
   else:
     dailyFlag = False  # Reset daily trigger
-
-  # Every 30 seconds, run Twitter scripts.  'lastId' is passed around
-  # to preserve state between invocations.  Probably simpler to do an
-  # import thing.
-  if t > nextInterval:
-    nextInterval = t + 30.0
-    result = interval()
-    if result is not None:
-      lastId = result.rstrip('\r\n')
-
