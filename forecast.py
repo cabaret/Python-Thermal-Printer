@@ -84,12 +84,15 @@ printer.print('{:^32}'.format(
   dom.getElementsByTagName('pubDate')[0].firstChild.data))
 temp = dom.getElementsByTagName('yweather:condition')[0].getAttribute('temp')
 cond = dom.getElementsByTagName('yweather:condition')[0].getAttribute('code')
-printer.print(temp)
-printer.print(deg)
-printer.println(' ' + conditions[int(cond)])
+currentConds = temp + deg + ' ' + conditions[int(cond)]
 printer.boldOn()
+printer.print('{:^32}'.format(currentConds))
+printer.println(' ' + conditions[int(cond)])
+printer.boldOff()
+printer.feed(1)
 
 # Print forecast
+printer.boldOn()
 printer.print('{:^32}'.format('Voorspelling:'))
 printer.boldOff()
 forecast(0)
