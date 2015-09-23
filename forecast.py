@@ -40,12 +40,7 @@ days = {
     'Sun': 'Zo'
 }
 
-conditions = {
-    'Tornado': 'Tornado',
-    'Tropical Storm': 'Tropische storm',
-    'Hurricane': 'Orkaan',
-    'Partly Cloudy': 'Gedeeltelijk bewolkt'
-}
+conditions = ["Tornado", "Tropische storm", "Orkaan", "Zware onweersbuien", "Onweersbuien", "Regen en sneeuw", "Regen en ijzel", "Sneeuw en ijzel", "Aanvriezende motregen", "Motregen", "Aanvriezende regen", "Buien", "Buien", "Sneeuwvlagen", "Lichte sneeuwbuien", "Stuivende sneeuw", "Sneeuw", "Hagel", "IJzel", "Stof", "Mistig", "Nevel", "Nevel", "Stormachtig", "Winderig", "Koud", "Bewolk", "Wisselend bewolkt", "Wisselend bewolkt", "Gedeeltelijk bewolkt", "Gedeeltelijk bewolkt", "Helder", "Zonnig", "Mooi", "Mooi", "Regen en hagel", "Heet", "Plaatselijke buien", "Onweersbuien", "Onweersbuien", "Buien", "Zware sneeuwval", "Sneeuwbuien", "Zware sneeuwval", "Gedeeltelijk bewolkt", "Onweersbuien", "Sneeuwbuien", "Onweersbuien"]
 
 # Dumps one forecast line to the printer
 def forecast(idx):
@@ -53,15 +48,17 @@ def forecast(idx):
 	day     = days[dom.getElementsByTagName(tag)[idx].getAttribute('day')]
 	lo      = dom.getElementsByTagName(tag)[idx].getAttribute('low')
 	hi      = dom.getElementsByTagName(tag)[idx].getAttribute('high')
-	cond    = dom.getElementsByTagName(tag)[idx].getAttribute('text')
+	cond    = dom.getElementsByTagName(tag)[idx].getAttribute('code')
+	printer.boldOn()
 	printer.print(day + ':')
+	printer.boldOff()
 	printer.feed(1)
-	printer.print('min ' + lo)
+	printer.print('Min. ' + lo)
 	printer.print(deg)
-	printer.print(' max ' + hi)
+	printer.print(' / Max. ' + hi)
 	printer.print(deg)
 	printer.feed(1)
-	printer.println(' ' + cond)
+	printer.println(conditions[cond])
 
 printer = Adafruit_Thermal("/dev/ttyAMA0", 19200, timeout=5)
 deg     = chr(0xf8) # Degree symbol on thermal printer
