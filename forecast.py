@@ -83,7 +83,7 @@ printer.boldOff()
 printer.print('{:^32}'.format(
   dom.getElementsByTagName('pubDate')[0].firstChild.data))
 temp = dom.getElementsByTagName('yweather:condition')[0].getAttribute('temp')
-cond = dom.getElementsByTagName('yweather:condition')[0].getAttribute('text')
+cond = dom.getElementsByTagName('yweather:condition')[0].getAttribute('code')
 printer.print(temp)
 printer.print(deg)
 printer.println(' ' + conditions[int(cond)])
