@@ -50,7 +50,7 @@ class Adafruit_Thermal(Serial):
 	lineSpacing     =  8
 	barcodeHeight   = 50
 	printMode       =  0
-	defaultHeatTime = 70
+	defaultHeatTime = 60
 
 	def __init__(self, *args, **kwargs):
 		# If no parameters given, use default port & baud rate.
@@ -570,3 +570,4 @@ class Adafruit_Thermal(Serial):
 		for arg in args:
 			self.write(str(arg))
 		self.write('\n')
+
