@@ -42,9 +42,9 @@ days = {
 
 conditions = {
     'Tornado': 'Tornado',
-    'Tropical storm': 'Tropische storm',
+    'Tropical Storm': 'Tropische storm',
     'Hurricane': 'Orkaan',
-    'Partly cloudy': 'Gedeeltelijk bewolkt'
+    'Partly Cloudy': 'Gedeeltelijk bewolkt'
 }
 
 # Dumps one forecast line to the printer
